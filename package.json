@@ -1,0 +1,36 @@
+{
+  "name": "ot-json1-immutable",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "author": "Charley DAVID <hello@calyh.re>",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rm -rf ./lib || true",
+    "build": "babel src/ --out-dir lib/ --ignore src/**/__tests__ --verbose",
+    "prepublish": "yarn lint && yarn test && yarn build",
+    "lint": "eslint src/",
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "eslint": "^5.16.0",
+    "immutable": "^4.0.0-rc.12",
+    "jest": "^24.7.1",
+    "ot-json1": "^0.2.4",
+    "rich-text": "^3.1.0"
+  },
+  "peerDependencies": {
+    "immutable": ">= 3.0",
+    "ot-json1": "*"
+  },
+  "jest": {
+    "roots": [
+      "./src"
+    ],
+    "testRegex": "/__tests__/.*\\.spec\\.js$"
+  }
+}
