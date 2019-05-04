@@ -36,7 +36,7 @@ export default function drop(held, fragment, path, reviver) {
   for (let i = 0; i < path.length; i++) {
     if (isPath(path[i])) {
       fragment = fragment
-        ? fragment.updateIn(lastPath, sub => drop(held, sub, path[i]))
+        ? fragment.updateIn(lastPath, sub => drop(held, sub, path[i], reviver))
         : undefined;
     } else if (isAction(path[i])) {
       const action = path[i];
