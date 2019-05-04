@@ -31,7 +31,7 @@ function insertNode(fragment, path, node) {
   });
 }
 
-export default function drop(held, fragment, path) {
+export default function drop(held, fragment, path, reviver) {
   const lastPath = [];
   for (let i = 0; i < path.length; i++) {
     if (isPath(path[i])) {
@@ -44,7 +44,7 @@ export default function drop(held, fragment, path) {
         fragment = insertNode(fragment, lastPath, held[action.d]);
       }
       if (hasInsert(action)) {
-        fragment = insertNode(fragment, lastPath, fromJS(action.i));
+        fragment = insertNode(fragment, lastPath, fromJS(action.i, reviver));
       }
       if (hasEdit(action)) {
         const edit = getEditType(action);

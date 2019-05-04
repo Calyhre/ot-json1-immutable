@@ -20,4 +20,28 @@ const op = json1.moveOp(['a'], ['b']);
 
 let doc = new Map({ a: 1 });
 doc = json1.type.apply(doc, op);
+// doc => new Map({ b: 1 })
+```
+
+Apply function also take a reviver, used by [Immutable's `fromJS`](https://immutable-js.github.io/immutable-js/docs/#/fromJS):
+
+```js
+function reviver(key, value) => {
+  if (!isKeyed(value)) {
+    return value.toList();
+  }
+  switch (value.get('object')) {
+    case 'block':
+      return Block.create(value.toJS());
+    default:
+      return value.toMap();
+  }
+}
+
+const op = json1.insertOp(['a'], { object: 'block' });
+let doc = new Map({});
+
+doc = json1.type.apply(doc, op, reviver);
+
+// doc.get('a') => new Block()
 ```

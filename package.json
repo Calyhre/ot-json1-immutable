@@ -9,7 +9,8 @@
     "build": "babel src/ --out-dir lib/ --ignore src/**/__tests__ --verbose",
     "prepublish": "yarn lint && yarn test && yarn build",
     "lint": "eslint src/",
-    "test": "jest"
+    "test": "jest",
+    "start": "yarn build --watch"
   },
   "dependencies": {},
   "devDependencies": {
