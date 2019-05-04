@@ -1,6 +1,6 @@
 {
   "name": "ot-json1-immutable",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "lib/index.js",
   "author": "Charley DAVID <hello@calyh.re>",
   "license": "MIT",
