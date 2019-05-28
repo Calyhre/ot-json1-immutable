@@ -1,9 +1,11 @@
 {
   "name": "ot-json1-immutable",
+  "description": "Add Immutable.js support to ot-json1",
   "version": "1.1.1",
   "main": "lib/index.js",
   "author": "Charley DAVID <hello@calyh.re>",
   "license": "MIT",
+  "repository": "git://github.com/calyhre/ot-json1-immutable.git",
   "scripts": {
     "prebuild": "rm -rf ./lib || true",
     "build": "babel src/ --out-dir lib/ --ignore src/**/__tests__ --verbose",
