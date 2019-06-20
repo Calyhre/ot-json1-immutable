@@ -1,4 +1,4 @@
-import { fromJS, isKeyed } from 'immutable';
+import { Record, fromJS, isKeyed } from 'immutable';
 
 import {
   isPath,
@@ -21,10 +21,7 @@ function insertNode(fragment, path, node) {
   const insertPath = path.slice(0, -1);
   const insertIndex = path[path.length - 1];
   return fragment.updateIn(insertPath, sub => {
-    if (isKeyed(sub)) {
-      if (sub.has(insertIndex)) {
-        throw Error(`Node already exists at path: [${path}]`);
-      }
+    if (isKeyed(sub) || Record.isRecord(sub)) {
       return sub.set(insertIndex, node);
     }
     return sub.insert(insertIndex, node);

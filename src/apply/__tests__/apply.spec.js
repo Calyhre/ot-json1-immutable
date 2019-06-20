@@ -27,13 +27,6 @@ describe('insertOp', () => {
 
     expect(apply(input, op)).toEqual(output);
   });
-
-  it('throws when inserting in place of existing node', () => {
-    const input = fromJS({ a: [0] });
-    const op = insertOp(['a'], [1]);
-
-    expect(() => apply(input, op)).toThrow('Node already exists at path: [a]');
-  });
 });
 
 describe('moveOp', () => {
