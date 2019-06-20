@@ -1,7 +1,7 @@
 {
   "name": "ot-json1-immutable",
   "description": "Add Immutable.js support to ot-json1",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "lib/index.js",
   "author": "Charley DAVID <hello@calyh.re>",
   "license": "MIT",
