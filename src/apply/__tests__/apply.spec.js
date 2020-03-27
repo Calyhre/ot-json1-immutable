@@ -1,5 +1,5 @@
 import { insertOp, moveOp, editOp, removeOp, replaceOp, type } from 'ot-json1';
-import { fromJS } from 'immutable';
+import { fromJS, Set, Map } from 'immutable';
 import Delta from 'quill-delta';
 import apply, { registerSubtype } from '..';
 
@@ -23,6 +23,14 @@ describe('insertOp', () => {
   it('inserts inside List', () => {
     const input = fromJS({ a: [1] });
     const output = fromJS({ a: [2, 1] });
+    const op = insertOp(['a', 0], 2);
+
+    expect(apply(input, op)).toEqual(output);
+  });
+
+  it('inserts inside a Set', () => {
+    const input = Map({a: Set([1])});
+    const output = Map({a: Set([1,2])});
     const op = insertOp(['a', 0], 2);
 
     expect(apply(input, op)).toEqual(output);

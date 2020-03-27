@@ -1,4 +1,4 @@
-import { Record, fromJS, isKeyed } from 'immutable';
+import { Record, fromJS, isKeyed, Set } from "immutable";
 
 import {
   isPath,
@@ -7,8 +7,8 @@ import {
   hasInsert,
   hasEdit,
   getEdit,
-  getEditType,
-} from './helpers';
+  getEditType
+} from "./helpers";
 
 function insertNode(fragment, path, node) {
   if (path.length === 0) {
@@ -23,6 +23,8 @@ function insertNode(fragment, path, node) {
   return fragment.updateIn(insertPath, sub => {
     if (isKeyed(sub) || Record.isRecord(sub)) {
       return sub.set(insertIndex, node);
+    } else if (Set.isSet(sub)) {
+      return sub.add(node);
     }
     return sub.insert(insertIndex, node);
   });
