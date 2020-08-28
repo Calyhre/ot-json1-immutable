@@ -1,7 +1,9 @@
 import { insertOp, moveOp, editOp, removeOp, replaceOp, type } from "ot-json1";
 import { fromJS, Set, Map } from "immutable";
 import Delta from "quill-delta";
-import apply, { registerSubtype } from "..";
+import otJSON1Immutable from "../..";
+const apply = otJSON1Immutable.type.applyImmutable;
+const registerSubtype = otJSON1Immutable.type.registerSubtype;
 
 describe("insertOp", () => {
   it("inserts at root", () => {
@@ -94,9 +96,10 @@ describe("editOp", () => {
 
   it("throws when ot type is unknown", () => {
     const input = fromJS({ a: ["Foo"] });
-    const op = editOp(["a", 0], "custom-type", ["edit"]);
 
-    expect(() => apply(input, op)).toThrow("Missing type: custom-type");
+    expect(() =>
+      apply(input, editOp(["a", 0], "custom-type", ["edit"]))
+    ).toThrow("Missing type: custom-type");
   });
 });
 

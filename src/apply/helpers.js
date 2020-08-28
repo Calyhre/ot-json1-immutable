@@ -1,4 +1,4 @@
-import json1 from "ot-json1";
+import * as json1 from "ot-json1";
 
 export const isPath = p => Array.isArray(p);
 export const isAction = p => typeof p === "object";

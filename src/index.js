@@ -1,4 +1,4 @@
-import json1 from "ot-json1";
+import * as json1 from "ot-json1";
 import applyImmutable, { registerSubtype } from "./apply";
 
 export default {
