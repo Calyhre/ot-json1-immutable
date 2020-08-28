@@ -1,7 +1,7 @@
-import json1 from 'ot-json1';
+import json1 from "ot-json1";
 
 export const isPath = p => Array.isArray(p);
-export const isAction = p => typeof p === 'object';
+export const isAction = p => typeof p === "object";
 export const hasPick = a => a && a.p != null;
 export const hasDrop = a => a && a.d != null;
 export const hasInsert = a => a && a.i != null;
@@ -18,7 +18,7 @@ export function getEditType(a) {
     }
     return SUBTYPES[a.et];
   } else if (a.es) {
-    return SUBTYPES['text-unicode'];
+    return SUBTYPES["text-unicode"];
   } else if (a.ena) {
     return SUBTYPES.number;
   }
@@ -36,12 +36,12 @@ export function registerSubtype(subtype) {
   json1.type.registerSubtype(subtype);
 }
 
-registerSubtype(require('ot-text-unicode'));
+registerSubtype(require("ot-text-unicode"));
 
 const add = (a, b) => a + b;
 registerSubtype({
-  name: 'number',
+  name: "number",
   apply: add,
   compose: add,
-  transform: a => a,
+  transform: a => a
 });

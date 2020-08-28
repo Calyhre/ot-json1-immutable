@@ -1,4 +1,4 @@
-import { isPath, isAction, hasPick, hasRemove } from './helpers';
+import { isPath, isAction, hasPick, hasRemove } from "./helpers";
 
 export default function pick(held, fragment, path) {
   const actions = [];
