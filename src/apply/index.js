@@ -1,7 +1,7 @@
-import pick from './pick';
-import drop from './drop';
+import pick from "./pick";
+import drop from "./drop";
 
-import { registerSubtype } from './helpers';
+import { registerSubtype } from "./helpers";
 
 function apply(snapshot, op, reviver) {
   if (op === null) return snapshot;
