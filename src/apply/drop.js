@@ -20,6 +20,11 @@ function insertNode(fragment, path, node) {
 
   const insertPath = path.slice(0, -1);
   const insertIndex = path[path.length - 1];
+
+  if (Set.isSet(fragment)) {
+    return fragment.add(node);
+  }
+
   return fragment.updateIn(insertPath, sub => {
     if (isKeyed(sub) || Record.isRecord(sub)) {
       return sub.set(insertIndex, node);

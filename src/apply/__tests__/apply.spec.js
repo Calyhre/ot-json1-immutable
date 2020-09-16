@@ -37,6 +37,16 @@ describe("insertOp", () => {
 
     expect(apply(input, op)).toEqual(output);
   });
+
+  it("inserts two values inside a Set", () => {
+    const input = Map({ a: Set([1]) });
+    const output = Map({ a: Set([1, 2, 3]) });
+    const firstInsert = insertOp(["a", 0], 2);
+    const secondInsert = insertOp(["a", 1], 3);
+    const op = type.compose(firstInsert, secondInsert);
+
+    expect(apply(input, op)).toEqual(output);
+  });
 });
 
 describe("moveOp", () => {
