@@ -1,4 +1,15 @@
+import { Set, is, fromJS } from "immutable";
 import { isPath, isAction, hasPick, hasRemove } from "./helpers";
+
+function removeInSet(sub, action, lastPath) {
+  const newSub = sub.filterNot(o => is(fromJS(o.toJS()), fromJS(action.r)));
+  if (is(newSub, sub)) {
+    throw new Error(
+      `Could not remove ${JSON.stringify(action.r)} at path: [${lastPath}]`
+    );
+  }
+  return newSub;
+}
 
 export default function pick(held, fragment, path) {
   const actions = [];
@@ -33,7 +44,18 @@ export default function pick(held, fragment, path) {
       held[action.p] = fragment.getIn(actionPath);
       fragment = fragment.deleteIn(actionPath);
     } else if (hasRemove(action)) {
-      fragment = fragment.deleteIn(actionPath);
+      // Partial support for Set (not supported in pick)
+      if (Set.isSet(fragment)) {
+        fragment = removeInSet(fragment, action, lastPath);
+        // Partial support for nested Set (not supported in pick)
+      } else if (Set.isSet(fragment.getIn(actionPath.slice(0, -1)))) {
+        const newFragment = fragment.updateIn(actionPath.slice(0, -1), sub => {
+          return removeInSet(sub, action, lastPath);
+        });
+        fragment = newFragment;
+      } else {
+        fragment = fragment.deleteIn(actionPath);
+      }
     }
   }
 

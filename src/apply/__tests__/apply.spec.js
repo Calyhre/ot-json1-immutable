@@ -127,6 +127,31 @@ describe("removeOp", () => {
 
     expect(apply(input, op)).toEqual(output);
   });
+
+  it("removes inside a Set", () => {
+    const input = Set([Map({ a: 1 })]);
+    const output = Set();
+    const op = removeOp([0], { a: 1 });
+
+    expect(apply(input, op)).toEqual(output);
+  });
+
+  it("removes in nested Set", () => {
+    const input = Map({ a: Set([Map({ b: 1 })]) });
+    const output = Map({ a: Set([]) });
+    const op = removeOp(["a", 0], { b: 1 });
+
+    expect(apply(input, op)).toEqual(output);
+  });
+
+  it("throws an error if it doesn't find the value inside the set", () => {
+    const input = Set([Map({ a: 1 })]);
+    const op = removeOp([0], { b: 2 });
+
+    expect(() => apply(input, op)).toThrow(
+      'Could not remove {"b":2} at path: [0]'
+    );
+  });
 });
 
 describe("replaceOp", () => {
